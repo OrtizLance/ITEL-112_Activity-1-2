@@ -2,7 +2,6 @@ package com.itel.SimpleInventory;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 
 @Getter
@@ -10,20 +9,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 
 public class Product {
-
-    private String name;
-    private BigDecimal price;
-    private Long quantity;
-    private Category category;
-    private Status status;
-
-    public Product(String name, BigDecimal price, Long quantity, Category category, Status status) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.category = category;
-        this.status = status;
-    }
 
     @Override
     public String toString() {
@@ -35,5 +20,27 @@ public class Product {
                 ", status=" + status +
                 '}';
     }
-}
 
+    private Status displayStatus(){
+        if (quantity>= 1)
+            status = Status.valueOf("Available");
+        else
+            status = Status.valueOf("Unavailable");
+
+        return status;
+    }
+    private String name;
+    private BigDecimal price;
+    private Long quantity;
+    private Category category;
+    private Status status;
+
+    public Product(String name, BigDecimal price, Long quantity, Category category) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.category = category;
+        this.status = displayStatus();
+    }
+
+}
